@@ -1,10 +1,10 @@
 # flutter-business-mobile
 
 TODO
+* documentation
 * setup flutter for android, ios, web
 * setup firebase
 * login package
 
-
-TODO LP 
-* deploy to github pages or netlify
+TODO Low priority 
+* deploy web to github pages or netlify
