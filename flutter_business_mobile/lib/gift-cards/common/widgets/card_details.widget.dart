@@ -30,19 +30,28 @@ class CardDetails extends ConsumerWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
               ),
               Column(
-                children: [
+                children: [ // TODO add listview here somewhere
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Spacer(flex: 2),
-                      Text(giftCard.brand), // TODO
+                      Text(giftCard.brand), // TODO make this presentable
                       const Spacer(flex: 1),
                       Text(giftCard.discount.toString()),
                       const Spacer(flex: 2),
                     ],
                   ),
                   Text(giftCard.terms),
-                  ...giftCard.denominations.map((Denomination e) => Text(e.price.toString())),
+                  ...giftCard.denominations.map((Denomination denomination) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                          children: [
+                            Text(denomination.currency.toString()),
+                            Text(denomination.price.toString()),
+                            Text(denomination.stock.toString()),
+                          ],
+                        ),
+                  )),
                 ],
               ),
               Row(
