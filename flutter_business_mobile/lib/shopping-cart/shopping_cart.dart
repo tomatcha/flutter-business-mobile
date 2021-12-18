@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ShoppingCart extends StatelessWidget {
   const ShoppingCart({Key? key}) : super(key: key);
 
