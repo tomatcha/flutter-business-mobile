@@ -23,7 +23,10 @@ class Root extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: index,
             items: [
-              const BottomNavigationBarItem(icon: Icon(Icons.card_giftcard), label: 'Gift Cards'),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.card_giftcard),
+                label: 'Gift Cards',
+              ),
               BottomNavigationBarItem(
                   icon: Consumer(
                     builder: (BuildContext context, WidgetRef ref, Widget? child) {
