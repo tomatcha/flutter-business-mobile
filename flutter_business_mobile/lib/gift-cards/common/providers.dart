@@ -10,7 +10,6 @@ final AutoDisposeFutureProvider<List<GiftCard>> giftCardProvider = FutureProvide
   if (response.statusCode == 200) {
     final dynamic decoded = jsonDecode(response.body);
     try {
-      print(decoded);
       final List<dynamic> data = decoded as List<dynamic>;
       return data.map((dynamic v) => GiftCard.fromJson(v as Map<String, dynamic>)).toList();
       // return [];
