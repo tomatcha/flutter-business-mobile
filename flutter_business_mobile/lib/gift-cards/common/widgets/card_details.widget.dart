@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_business_mobile/gift-cards/common/classes/denomination.dart';
 import 'package:flutter_business_mobile/gift-cards/common/classes/gift_card.dart';
 import 'package:flutter_business_mobile/providers.dart';
 import 'package:flutter_business_mobile/shopping-cart/common/classes/cart_item.class.dart';
+import 'package:flutter_business_mobile/widgets/purchase_confirmation.widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../text.constants.dart';
@@ -27,21 +29,46 @@ class CardDetails extends ConsumerWidget {
                 child: Image.network(giftCard.image),
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
               ),
-              Row(
-                children: [Text(giftCard.brand)],
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Spacer(flex: 2),
+                      Text(giftCard.brand), // TODO
+                      const Spacer(flex: 1),
+                      Text(giftCard.discount.toString()),
+                      const Spacer(flex: 2),
+                    ],
+                  ),
+                  Text(giftCard.terms),
+                  ...giftCard.denominations.map((Denomination e) => Text(e.price.toString())),
+                ],
               ),
               Row(
                 children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Show purchase confirmation
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PurchaseConfirmation(
+                          cartItems: [CartItem(giftCard: giftCard)],
+                        ),
+                      ));
+                    },
+                    child: Text('Buy Now'),
+                  ),
                   const Spacer(),
                   ElevatedButton(
-                      onPressed: () {
-                        // Take a copy of the current cart
-                        final List<CartItem> cartItems = ref.read(cartProvider);
-                        // Assign a new list to the stateProvider so that listeners are updated
-                        ref.watch(cartProvider.notifier).state = [...cartItems, CartItem(giftCard: giftCard)];
-                        // list.add(CartItem) won't notify listeners because the list is being modified, not overwritten
-                      },
-                      child: Text('Buy Now')),
+                    onPressed: () {
+                      // Take a copy of the current cart
+                      final List<CartItem> cartItems = ref.read(cartProvider);
+                      // Assign a new list to the stateProvider so that listeners are updated
+                      ref.watch(cartProvider.notifier).state = [...cartItems, CartItem(giftCard: giftCard)];
+                      // list.add(CartItem) won't notify listeners because the list is being modified, not overwritten
+                    },
+                    child: Text('Add to Cart'),
+                  )
                 ],
               )
             ],
