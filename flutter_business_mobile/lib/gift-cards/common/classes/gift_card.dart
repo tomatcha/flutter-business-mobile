@@ -19,58 +19,58 @@ class GiftCard {
     List<dynamic>? customDenominations,
     String? disclaimer,
   }) {
-    _vendor = vendor;
-    _id = id;
-    _brand = brand;
-    _image = image;
-    _denominations = denominations;
-    _position = position;
-    _discount = discount;
-    _terms = terms;
-    _importantContent = importantContent;
-    _cardTypeStatus = cardTypeStatus;
-    _customDenominations = customDenominations;
-    _disclaimer = disclaimer;
+    _vendor = vendor ?? '';
+    _id = id ?? '';
+    _brand = brand ?? '';
+    _image = image ?? '';
+    _denominations = denominations ?? [];
+    _position = position ?? 0;
+    _discount = discount ?? 0;
+    _terms = terms ?? '';
+    _importantContent = importantContent ?? '';
+    _cardTypeStatus = cardTypeStatus ?? '';
+    _customDenominations = customDenominations ?? [];
+    _disclaimer = disclaimer ?? '';
   }
 
-  factory GiftCard.fromJson(dynamic json)=> _$GiftCardFromJson(json);
+  factory GiftCard.fromJson(dynamic json) => _$GiftCardFromJson(json);
 
-  String? _vendor;
-  String? _id;
-  String? _brand;
-  String? _image;
-  List<Denomination>? _denominations;
-  int? _position;
-  double? _discount;
-  String? _terms;
-  String? _importantContent;
-  String? _cardTypeStatus;
-  List<dynamic>? _customDenominations;
-  String? _disclaimer;
+  late String _vendor;
+  late String _id;
+  late String _brand;
+  late String _image;
+  late List<Denomination> _denominations;
+  late int _position;
+  late double _discount;
+  late String _terms;
+  late String _importantContent;
+  late String _cardTypeStatus;
+  late List<dynamic> _customDenominations;
+  late String _disclaimer;
 
-  String? get vendor => _vendor;
+  String get vendor => _vendor;
 
-  String? get id => _id;
+  String get id => _id;
 
-  String? get brand => _brand;
+  String get brand => _brand;
 
-  String? get image => _image;
+  String get image => _image;
 
-  List<Denomination>? get denominations => _denominations;
+  List<Denomination> get denominations => _denominations;
 
-  int? get position => _position;
+  int get position => _position;
 
-  double? get discount => _discount;
+  double get discount => _discount;
 
-  String? get terms => _terms;
+  String get terms => _terms;
 
-  String? get importantContent => _importantContent;
+  String get importantContent => _importantContent;
 
-  String? get cardTypeStatus => _cardTypeStatus;
+  String get cardTypeStatus => _cardTypeStatus;
 
-  List<dynamic>? get customDenominations => _customDenominations;
+  List<dynamic> get customDenominations => _customDenominations;
 
-  String? get disclaimer => _disclaimer;
+  String get disclaimer => _disclaimer;
 
   Map<String, dynamic> toJson() => _$GiftCardToJson(this);
 }

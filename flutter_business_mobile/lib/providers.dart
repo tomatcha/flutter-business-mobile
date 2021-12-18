@@ -5,6 +5,6 @@ final StateProvider<List<GiftCard>> cartProvider = StateProvider((ref) {
   return [];
 });
 
-final StateProvider<int> screenProvider = StateProvider<int>((_) {
+final StateProvider<int> bottomNavProvider = StateProvider<int>((_) {
   return 0;
 });

@@ -16,7 +16,7 @@ class Root extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final int index = ref.watch(screenProvider);
+        final int index = ref.watch(bottomNavProvider);
         return Scaffold(
           appBar: AppBar(title: const Text('Flutter Business Mobile')),
           body: _screens[index],
@@ -43,7 +43,7 @@ class Root extends StatelessWidget {
                   label: 'Shopping Cart'),
             ],
             onTap: (int index) {
-              ref.read(screenProvider.notifier).state = index;
+              ref.read(bottomNavProvider.notifier).state = index;
             },
           ),
         );
