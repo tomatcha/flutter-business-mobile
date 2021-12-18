@@ -1,7 +1,7 @@
+import 'package:flutter_business_mobile/shopping-cart/common/classes/cart_item.class.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'gift-cards/common/classes/gift_card.dart';
 
-final StateProvider<List<GiftCard>> cartProvider = StateProvider((ref) {
+final StateProvider<List<CartItem>> cartProvider = StateProvider((ref) {
   return [];
 });
 
