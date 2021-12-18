@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Root extends StatelessWidget {
   final List<Widget> _screens = [
-    const GiftCards(),
-    const ShoppingCart(),
+    GiftCards(),
+    ShoppingCart(),
   ];
 
   @override
