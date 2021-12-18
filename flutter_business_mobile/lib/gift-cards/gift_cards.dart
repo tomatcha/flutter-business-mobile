@@ -14,10 +14,18 @@ class GiftCards extends StatelessWidget {
         final thing = ref.watch(giftCardProvider);
         return thing.when(
           data: (List<GiftCard> data) {
-            return Text('Got some cards ${data.length}');
+            return ListView.builder(
+              itemBuilder: (BuildContext listViewContext, int index) {
+                final GiftCard giftCard = data[index];
+                return Text(giftCard.brand ?? '');
+              },
+              itemCount: data.length,
+            );
           },
           loading: () {
-            return SpinKitCircle();
+            return const SpinKitCircle(
+              color: Colors.blue,
+            );
           },
           error: (Object error, StackTrace? stackTrace) {
             return Text(error.toString());
