@@ -29,57 +29,62 @@ class CardDetails extends ConsumerWidget {
                 child: Image.network(giftCard.image),
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
               ),
-              Column(
-                children: [ // TODO add listview here somewhere
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Spacer(flex: 2),
-                      Text(giftCard.brand), // TODO make this presentable
-                      const Spacer(flex: 1),
-                      Text(giftCard.discount.toString()),
-                      const Spacer(flex: 2),
-                    ],
-                  ),
-                  Text(giftCard.terms),
-                  ...giftCard.denominations.map((Denomination denomination) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                          children: [
-                            Text(denomination.currency.toString()),
-                            Text(denomination.price.toString()),
-                            Text(denomination.stock.toString()),
-                          ],
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Spacer(flex: 2),
+                        Text(giftCard.brand), // TODO make this presentable
+                        const Spacer(flex: 1),
+                        Text(giftCard.discount.toString()),
+                        const Spacer(flex: 2),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Show purchase confirmation
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PurchaseConfirmation(
+                                cartItems: [CartItem(giftCard: giftCard)],
+                              ),
+                            ));
+                          },
+                          child: Text(TextConstants.buyNow),
                         ),
-                  )),
-                ],
+                        const Spacer(),
+                        // TODO quantity selector
+                        const Spacer(),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Take a copy of the current cart
+                            final List<CartItem> cartItems = ref.read(cartProvider);
+                            // Assign a new list to the stateProvider so that listeners are updated
+                            ref.watch(cartProvider.notifier).state = [...cartItems, CartItem(giftCard: giftCard)];
+                            // list.add(CartItem) won't notify listeners because the list is being modified, not overwritten
+                          },
+                          child: Text(TextConstants.addToCart),
+                        )
+                      ],
+                    ),
+                    Text(giftCard.terms),
+                    ...giftCard.denominations.map((Denomination denomination) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Text(denomination.currency.toString()),
+                              Text(denomination.price.toString()),
+                              Text(denomination.stock.toString()),
+                            ],
+                          ),
+                        )),
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Show purchase confirmation
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PurchaseConfirmation(
-                          cartItems: [CartItem(giftCard: giftCard)],
-                        ),
-                      ));
-                    },
-                    child: Text('Buy Now'),
-                  ),
-                  const Spacer(),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Take a copy of the current cart
-                      final List<CartItem> cartItems = ref.read(cartProvider);
-                      // Assign a new list to the stateProvider so that listeners are updated
-                      ref.watch(cartProvider.notifier).state = [...cartItems, CartItem(giftCard: giftCard)];
-                      // list.add(CartItem) won't notify listeners because the list is being modified, not overwritten
-                    },
-                    child: Text('Add to Cart'),
-                  )
-                ],
-              )
             ],
           ),
         ),

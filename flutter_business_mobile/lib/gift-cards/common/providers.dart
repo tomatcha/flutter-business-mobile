@@ -23,3 +23,7 @@ final AutoDisposeFutureProvider<List<GiftCard>> giftCardProvider = FutureProvide
     throw Exception('Error retrieving gift cards.');
   }
 });
+
+final StateProvider<int> quantityProvider = StateProvider((ref) {
+  return 1;
+});
