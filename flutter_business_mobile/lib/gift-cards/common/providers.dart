@@ -24,6 +24,6 @@ final AutoDisposeFutureProvider<List<GiftCard>> giftCardProvider = FutureProvide
   }
 });
 
-final StateProvider<int> quantityProvider = StateProvider((ref) {
+final AutoDisposeStateProvider<int> quantityProvider = StateProvider.autoDispose((ref) {
   return 1;
 });

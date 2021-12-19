@@ -17,7 +17,7 @@ class PurchaseConfirmation extends StatelessWidget {
           children: [
             const Spacer(flex: 1),
             const Text('Purchase Successful'),
-            Text(cartItems.length.toString()),
+            Text(cartItems.length.toString()), // TODO
             const Spacer(flex: 2),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
