@@ -39,6 +39,12 @@ class ShoppingCart extends ConsumerWidget {
           child: ListView(
             shrinkWrap: true,
             children: [
+              cart.isEmpty
+                  ? const Padding(
+                      padding: EdgeInsets.all(50.0),
+                      child: Text('No items'),
+                    )
+                  : Container(),
               ...cart.map(
                 (CartItem cartItem) {
                   return Card(
