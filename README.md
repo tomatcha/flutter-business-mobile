@@ -2,6 +2,8 @@
 
 To run: target main.dart inside `flutter_business_mobile/lib` using Android Studio or run `flutter run lib/main.dart` inside the `flutter_business_mobile` folder.
 
+To run tests: run `flutter test` inside the `flutter_business_mobile` folder.
+
 Tested using the following emulators:
 * Pixel 4 API 30 (phone)
 * Pixel C API 30 (tablet)

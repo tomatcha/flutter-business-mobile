@@ -1,5 +1,5 @@
 class TextConstants {
-  static String details = 'Details';
+  static String detail = 'Detail';
   static String buyNow = 'Buy Now';
   static String addToCart = 'Add to Cart';
   static String denominations = 'Denominations';
@@ -9,4 +9,5 @@ class TextConstants {
   static String shoppingCard = 'Shopping Cart';
   static String purchaseSuccessful = 'Purchase Successful';
   static String dismiss = 'Dismiss';
+  static String discount = 'Discount';
 }

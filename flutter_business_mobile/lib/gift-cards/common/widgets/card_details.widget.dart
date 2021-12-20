@@ -16,7 +16,7 @@ class CardDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TextConstants.details),
+        title: Text(TextConstants.detail),
         actions: [CartButton()],// TODO clicking this doesn't dismiss the details page
       ),
       body: Padding(

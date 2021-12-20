@@ -31,7 +31,7 @@ class GiftCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(giftCard.brand, overflow: TextOverflow.ellipsis),
-                  Text(giftCard.discount.toString(), style: sub),
+                  Text(TextConstants.discount + ': ' + giftCard.discount.toString(), style: sub),
                   Text(giftCard.vendor, style: sub),
                 ],
               ),
@@ -42,7 +42,7 @@ class GiftCardWidget extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => CardDetails(giftCard: giftCard)));
                 },
-                child: Text(TextConstants.details),
+                child: Text(TextConstants.detail),
               ),
             )
           ],
