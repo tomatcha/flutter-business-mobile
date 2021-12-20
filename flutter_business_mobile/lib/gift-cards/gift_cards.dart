@@ -7,7 +7,6 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'common/providers.dart';
 
 class GiftCards extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Consumer(

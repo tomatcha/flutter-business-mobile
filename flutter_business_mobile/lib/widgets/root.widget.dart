@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_business_mobile/gift-cards/gift_cards.dart';
 import 'package:flutter_business_mobile/providers.dart';
 import 'package:flutter_business_mobile/shopping-cart/shopping_cart.dart';
+import 'package:flutter_business_mobile/text.constants.dart';
 import 'package:flutter_business_mobile/widgets/cart_button.widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,18 +19,21 @@ class Root extends StatelessWidget {
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
           final int index = ref.watch(bottomNavProvider);
           return Scaffold(
-            appBar: AppBar(title: const Text('Flutter Business Mobile'),actions: [CartButton()],),
+            appBar: AppBar(
+              title: Text(TextConstants.title),
+              actions: [CartButton()],
+            ),
             body: _screens[index],
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: index,
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.card_giftcard),
-                  label: 'Gift Cards',
+                  icon: const Icon(Icons.card_giftcard),
+                  label: TextConstants.giftCards,
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
-                  label: 'Shopping Cart',
+                  icon: const Icon(Icons.shopping_cart),
+                  label: TextConstants.shoppingCard,
                 ),
               ],
               onTap: (int index) {

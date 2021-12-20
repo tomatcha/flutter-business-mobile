@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_business_mobile/shopping-cart/common/classes/cart_item.class.dart';
+import 'package:flutter_business_mobile/text.constants.dart';
 
 class PurchaseConfirmation extends StatelessWidget {
   List<CartItem> cartItems;
@@ -16,7 +17,7 @@ class PurchaseConfirmation extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Spacer(flex: 1),
-            const Text('Purchase Successful'),
+            Text(TextConstants.purchaseSuccessful),
             Text(cartItems.length.toString()), // TODO
             const Spacer(flex: 2),
             Row(
@@ -26,7 +27,7 @@ class PurchaseConfirmation extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Dismiss'),
+                  child: Text(TextConstants.dismiss),
                 ),
               ],
             )

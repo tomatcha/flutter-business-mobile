@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_business_mobile/gift-cards/common/classes/denomination.dart';
 import 'package:flutter_business_mobile/gift-cards/common/classes/gift_card.dart';
-import 'package:flutter_business_mobile/gift-cards/common/providers.dart';
 import 'package:flutter_business_mobile/gift-cards/common/widgets/denomination.widget.dart';
-import 'package:flutter_business_mobile/gift-cards/common/widgets/quantity_selector.widget.dart';
-import 'package:flutter_business_mobile/providers.dart';
-import 'package:flutter_business_mobile/shopping-cart/common/classes/cart_item.class.dart';
 import 'package:flutter_business_mobile/widgets/cart_button.widget.dart';
-import 'package:flutter_business_mobile/widgets/purchase_confirmation.widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../text.constants.dart';
@@ -41,9 +36,13 @@ class CardDetails extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                      Text('Brand: ${giftCard.brand}'), // TODO make this presentable
-                    ]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('Brand: ${giftCard.brand}'), // TODO make this presentable
+                      ],
+                    ),
                   ),
                   Text('Discount: ${giftCard.discount.toString()}'),
                 ],

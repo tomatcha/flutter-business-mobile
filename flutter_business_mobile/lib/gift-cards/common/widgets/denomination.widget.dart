@@ -43,7 +43,13 @@ class DenominationWidget extends ConsumerWidget {
                         builder: (context) {
                           final int quantity = ref.watch(quantityProvider.notifier).state;
                           return PurchaseConfirmation(
-                            cartItems: [CartItem(giftCard: giftCard, quantity: quantity)],
+                            cartItems: [
+                              CartItem(
+                                giftCard: giftCard,
+                                quantity: quantity,
+                                denomination: denomination,
+                              ),
+                            ],
                           );
                         },
                       ),
@@ -69,7 +75,14 @@ class DenominationWidget extends ConsumerWidget {
                       // Get the quantity
                       final int quantity = ref.watch(quantityProvider.notifier).state;
                       // Assign a new list to the stateProvider so that listeners are updated
-                      ref.watch(cartProvider.notifier).state = [...cartItems, CartItem(giftCard: giftCard, quantity: quantity)];
+                      ref.watch(cartProvider.notifier).state = [
+                        ...cartItems,
+                        CartItem(
+                          giftCard: giftCard,
+                          quantity: quantity,
+                          denomination: denomination,
+                        )
+                      ];
                       // list.add(CartItem) won't notify listeners because the list is being modified, not overwritten
                     },
                     child: Text(TextConstants.addToCart),
