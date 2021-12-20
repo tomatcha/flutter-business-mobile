@@ -13,7 +13,7 @@ class CardDetails extends ConsumerWidget {
   CardDetails({required this.giftCard});
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(TextConstants.details),

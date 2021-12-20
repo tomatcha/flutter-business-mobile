@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_business_mobile/gift-cards/common/widgets/quantity_selector.widget.dart';
 import 'package:flutter_business_mobile/providers.dart';
 import 'package:flutter_business_mobile/shopping-cart/common/classes/cart_item.class.dart';
+import 'package:flutter_business_mobile/widgets/purchase_confirmation.widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -14,6 +16,11 @@ class ShoppingCart extends ConsumerWidget {
       padding: const EdgeInsets.all(7),
       minimumSize: Size.zero,
     );
+
+    double total = 0;
+    for (var element in cart) {
+      total = total + element.calculateSubTotal();
+    }
     return Column(
       children: [
         Padding(
@@ -69,7 +76,7 @@ class ShoppingCart extends ConsumerWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
-                                  'Total: ${(e.denomination.price! * e.quantity).toString()}',
+                                  'Subtotal: ${e.calculateSubTotal().toString()}',
                                   style: const TextStyle(fontSize: 12),
                                 ),
                               )
@@ -88,10 +95,37 @@ class ShoppingCart extends ConsumerWidget {
                                 TextButton(
                                   style: style,
                                   onPressed: () {
-                                    // TODO Edit
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        final AutoDisposeStateProvider<int> quantityProvider = StateProvider.autoDispose((ref) {
+                                          return e.quantity;
+                                        });
+                                        return AlertDialog(
+                                          content: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text('Update Quantity'),
+                                              QuantitySelector(quantityProvider: quantityProvider),
+                                            ],
+                                          ),
+                                          actions: [
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                e.quantity = ref.read(quantityProvider);
+                                                updateCart(ref, null);
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('Close'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                      barrierDismissible: false,
+                                    );
                                   },
                                   child: const Text(
-                                    'edit',
+                                    'Edit',
                                     style: TextStyle(fontSize: 10),
                                   ),
                                 )
@@ -117,13 +151,29 @@ class ShoppingCart extends ConsumerWidget {
             ],
           ),
         ),
-        // TODO subtotal
-        ElevatedButton(
-          onPressed: () {
-            //show confirmation screen
-          },
-          child: const Text('Checkout'),
-        )
+        Row(
+          children: [
+            const Spacer(),
+            Text('Total: $total'),
+            const Spacer(),
+            ElevatedButton(
+              onPressed: () {
+                //show confirmation screen
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      final List<CartItem> cartItems = ref.watch(cartProvider);
+                      // TODO when this screen is shown here, clear the cart
+                      return PurchaseConfirmation(cartItems: cartItems);
+                    },
+                  ),
+                );
+              },
+              child: const Text('Checkout'),
+            ),
+            const Spacer(),
+          ],
+        ),
       ],
     );
   }

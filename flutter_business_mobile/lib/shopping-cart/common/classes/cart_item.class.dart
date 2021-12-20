@@ -11,4 +11,8 @@ class CartItem {
       this.quantity = quantity;
     }
   }
+
+  double calculateSubTotal() {
+    return denomination.price! * quantity;
+  }
 }
