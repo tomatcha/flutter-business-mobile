@@ -21,6 +21,17 @@ updateCart(WidgetRef ref, CartItem? cartItem) {
   ];
 }
 
+clearCart(WidgetRef ref) {
+  List<CartItem> cartItems = ref.read(cartProvider);
+  // Mark all items for removal
+  ref.watch(cartProvider.notifier).state = cartItems.map((CartItem cartItem) {
+    cartItem.remove = true;
+    return cartItem;
+  }).toList();
+
+  updateCart(ref, null);
+}
+
 final StateProvider<int> bottomNavProvider = StateProvider<int>((_) {
   return 0;
 });

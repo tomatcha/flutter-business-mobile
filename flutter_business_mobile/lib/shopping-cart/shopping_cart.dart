@@ -40,7 +40,7 @@ class ShoppingCart extends ConsumerWidget {
             shrinkWrap: true,
             children: [
               ...cart.map(
-                (CartItem e) {
+                (CartItem cartItem) {
                   return Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -49,7 +49,7 @@ class ShoppingCart extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: FadeInImage.memoryNetwork(
-                              image: e.giftCard.image,
+                              image: cartItem.giftCard.image,
                               placeholder: kTransparentImage,
                               width: 30,
                             ),
@@ -60,7 +60,7 @@ class ShoppingCart extends ConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  e.giftCard.brand,
+                                  cartItem.giftCard.brand,
                                   style: const TextStyle(fontSize: 12),
                                 )
                               ],
@@ -70,13 +70,13 @@ class ShoppingCart extends ConsumerWidget {
                           Column(
                             children: [
                               Text(
-                                '${e.denomination.currency} ${e.denomination.price.toString()}',
+                                '${cartItem.denomination.currency} ${cartItem.denomination.price.toString()}',
                                 style: const TextStyle(fontSize: 12),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
-                                  'Subtotal: ${e.calculateSubTotal().toString()}',
+                                  'Subtotal: ${cartItem.calculateSubTotal().toStringAsFixed(2)}',
                                   style: const TextStyle(fontSize: 12),
                                 ),
                               )
@@ -89,7 +89,7 @@ class ShoppingCart extends ConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Quantity: ${e.quantity.toString()}',
+                                  'Quantity: ${cartItem.quantity.toString()}',
                                   style: const TextStyle(fontSize: 10),
                                 ),
                                 TextButton(
@@ -99,24 +99,24 @@ class ShoppingCart extends ConsumerWidget {
                                       context: context,
                                       builder: (context) {
                                         final AutoDisposeStateProvider<int> quantityProvider = StateProvider.autoDispose((ref) {
-                                          return e.quantity;
+                                          return cartItem.quantity;
                                         });
                                         return AlertDialog(
                                           content: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              Text('Update Quantity'),
+                                              const Text('Update Quantity'),
                                               QuantitySelector(quantityProvider: quantityProvider),
                                             ],
                                           ),
                                           actions: [
                                             ElevatedButton(
                                               onPressed: () {
-                                                e.quantity = ref.read(quantityProvider);
+                                                cartItem.quantity = ref.read(quantityProvider);
                                                 updateCart(ref, null);
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Close'),
+                                              child: const Text('Close'),
                                             ),
                                           ],
                                         );
@@ -136,13 +136,10 @@ class ShoppingCart extends ConsumerWidget {
                             style: style,
                             onPressed: () {
                               // Remove item
-                              e.remove = true;
+                              cartItem.remove = true;
                               updateCart(ref, null);
                             },
-                            child: const Text(
-                              'Remove',
-                              style: TextStyle(fontSize: 10),
-                            ),
+                            child: const Text('Remove', style: TextStyle(fontSize: 10)),
                           )
                         ],
                       ),
@@ -164,9 +161,8 @@ class ShoppingCart extends ConsumerWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) {
-                      final List<CartItem> cartItems = ref.watch(cartProvider);
-                      // TODO when this screen is shown here, clear the cart
-                      return PurchaseConfirmation(cartItems: cartItems);
+                      final List<CartItem> cartItems = ref.read(cartProvider);
+                      return PurchaseConfirmation(cartItems: cartItems, total: total, shouldClearCart: true);
                     },
                   ),
                 );

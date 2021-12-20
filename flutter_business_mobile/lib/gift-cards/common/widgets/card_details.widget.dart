@@ -17,7 +17,7 @@ class CardDetails extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(TextConstants.details),
-        actions: [CartButton()],
+        actions: [CartButton()],// TODO clicking this doesn't dismiss the details page
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

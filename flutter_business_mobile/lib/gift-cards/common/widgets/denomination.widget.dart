@@ -40,16 +40,16 @@ class DenominationWidget extends ConsumerWidget {
                     // Show purchase confirmation
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) {
+                        builder: (BuildContext buildContext) {
                           final int quantity = ref.watch(quantityProvider.notifier).state;
+                          final CartItem cartItem = CartItem(
+                            giftCard: giftCard,
+                            quantity: quantity,
+                            denomination: denomination,
+                          );
                           return PurchaseConfirmation(
-                            cartItems: [
-                              CartItem(
-                                giftCard: giftCard,
-                                quantity: quantity,
-                                denomination: denomination,
-                              ),
-                            ],
+                            total: cartItem.calculateSubTotal(),
+                            cartItems: [cartItem],
                           );
                         },
                       ),
