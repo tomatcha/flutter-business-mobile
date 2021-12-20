@@ -5,6 +5,7 @@ class CartItem {
   GiftCard giftCard;
   Denomination denomination;
   int quantity = 1;
+  bool remove = false;
 
   CartItem({required this.giftCard, quantity, required this.denomination}) {
     if (quantity != null) {

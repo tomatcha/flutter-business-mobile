@@ -135,7 +135,9 @@ class ShoppingCart extends ConsumerWidget {
                           TextButton(
                             style: style,
                             onPressed: () {
-                              //TODO REmove item
+                              // Remove item
+                              e.remove = true;
+                              updateCart(ref, null);
                             },
                             child: const Text(
                               'Remove',

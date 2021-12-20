@@ -7,7 +7,10 @@ final StateProvider<List<CartItem>> cartProvider = StateProvider((ref) {
 
 updateCart(WidgetRef ref, CartItem? cartItem) {
   // Take a copy of the current cart
-  final List<CartItem> cartItems = ref.read(cartProvider);
+  List<CartItem> cartItems = ref.read(cartProvider);
+
+  // Check for any items marked for removal
+  cartItems = cartItems.where((element) => element.remove == false).toList();
 
   if (cartItem != null) {
     cartItems.add(cartItem);
