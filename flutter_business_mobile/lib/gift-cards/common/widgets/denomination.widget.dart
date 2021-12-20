@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../providers.dart';
 import '../../../text.constants.dart';
-import '../providers.dart';
 
 class DenominationWidget extends ConsumerWidget {
   Denomination denomination;

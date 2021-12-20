@@ -33,13 +33,21 @@ class CardDetails extends ConsumerWidget {
               child: Image.network(giftCard.image),
               borderRadius: const BorderRadius.all(Radius.circular(15)),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(giftCard.brand), // TODO make this presentable
-                const Spacer(flex: 1),
-                Text(giftCard.discount.toString()),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                      Text('Brand: ${giftCard.brand}'), // TODO make this presentable
+                    ]),
+                  ),
+                  Text('Discount: ${giftCard.discount.toString()}'),
+                ],
+              ),
             ),
             Expanded(
               child: ListView(
