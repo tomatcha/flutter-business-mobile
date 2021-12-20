@@ -18,12 +18,18 @@ class DenominationWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    // Declare quantityProvider here so each denomination has it's own instance
+    // TODO there is probably definitely a better way to achieve this
+    final AutoDisposeStateProvider<int> quantityProvider = StateProvider.autoDispose((ref) {
+      return 1;
+    });
+
     final ButtonStyle style = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 9),
       padding: const EdgeInsets.all(7),
       minimumSize: Size.zero,
     );
-    final bool isInStock = denomination.stock == 'IN_STOCK';
+    final bool isInStock = denomination.stock == 'IN_STOCK'; // TODO constant
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8, top: 0, bottom: 0),
       child: Row(
@@ -55,7 +61,7 @@ class DenominationWidget extends ConsumerWidget {
           const Spacer(flex: 3),
           ...(isInStock
               ? [
-                  QuantitySelector(),
+                  QuantitySelector(quantityProvider: quantityProvider),
                   ElevatedButton(
                     style: style,
                     onPressed: () {
